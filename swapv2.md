@@ -478,11 +478,12 @@ Data format:
 
 ### Request
 - Method: **GET**
-- URL: ```/swapres?symbol=space-mtt&amountIn=20000&oneForTwo=1```
+- URL: ```/swapres?symbol=space-mtt&amount=20000&zeroForOne=1&exactInput=1```
 
 > * symbol: swap pool symbol which got from ```/allpairs```.
-> * amountIn: the amount you want to swap.
-> * oneForTwo: 1: swap token1 to token2. 0: swap token2 to token1.
+> * amount: the amount you want to swap.
+> * zeroForOne: 1: swap token1 to token2. 0: swap token2 to token1.
+> * exactInput: 1: amount is the input amount. 0: amunt is the output amount.
 
 ### Response
 ```

@@ -148,3 +148,26 @@ export function getAmountsForLiquidity(
     }
     return { amount0, amount1 }
 }
+
+export function getMaxLiquidityForAmounts(
+    sqrtRatioCurrentX96: bigint,
+    sqrtRatioAX96: bigint,
+    sqrtRatioBX96: bigint,
+    amount0: bigint,
+    amount1: bigint,
+) {
+    if (sqrtRatioAX96 > sqrtRatioBX96) {
+        [sqrtRatioAX96, sqrtRatioBX96] = [sqrtRatioBX96, sqrtRatioAX96];
+    }
+
+    if (sqrtRatioCurrentX96 <= sqrtRatioAX96) {
+        return getLiquidityForAmount0(sqrtRatioAX96, sqrtRatioBX96, amount0);
+    } else if (sqrtRatioCurrentX96 < sqrtRatioBX96) {
+        const liquidity0 = getLiquidityForAmount0(sqrtRatioCurrentX96, sqrtRatioBX96, amount0);
+        const liquidity1 = getLiquidityForAmount1(sqrtRatioAX96, sqrtRatioCurrentX96, amount1);
+
+        return liquidity0 < liquidity1 ? liquidity0 : liquidity1;
+    } else {
+        return getLiquidityForAmount1(sqrtRatioAX96, sqrtRatioBX96, amount1);
+    }
+}

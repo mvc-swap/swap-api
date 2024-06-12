@@ -128,6 +128,7 @@ Before doing swap operation, you need request swap args.
     symbol: "mvc-ssp",
     address: "msREe5jsynP65899v1KJCydf6Sc9pJPb8S",
     op: 1,
+    amountIn: "32434",
     source: 'mvcswap.io'
 }
 ```
@@ -136,6 +137,7 @@ Before doing swap operation, you need request swap args.
 > * address: the user's address used for accepting mvc and tokens.
 > * op: swap operation: 1 add liquidity, 2 remove liquidity, 3 swap token1 to token2. 4 swap token2 to token1. 102 remove liquidity.
 > * source: mark the identity of the caller to make it easier to find errors.
+> * amountIn: optional. If op is 3 or 4, amountIn means the amount user want to swap which is used to evaluate miner fee.
 
 ### Response
 ```

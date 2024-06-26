@@ -50,7 +50,20 @@
       "minTick": -1000000,
       "maxTick": 1000000,
       "tickSpacing": 100,
-      "poolAmount": "0"
+      "poolAmount": "0",
+      "reward": {
+        "rewardAmountPerSecond": "0",
+        "rewardStartTime": 0,
+        "rewardEndTime": 0,
+        "token": {
+          "symbol": "mtt",
+          "tokenID": "16c3d9248b245e52bc5763e0eed7a287af89f0f7",
+          "genesisHash": "26b2a9aac0c8a3594ce61e3592ca3ca61f34b7c3",
+          "codeHash": "a2421f1e90c6048c36745edd44fad682e8644693",
+          "decimal": 4,
+          "genesisTxid": "b076dc5caf262871c12b8be64b1a841786c0d262069661a08a1f844a1ac72a4c00000000"
+        }
+      }
     }
   }
 }
@@ -68,6 +81,10 @@ data format:
 > * maxTick: The maximum tick of this pool.
 > * tickSpacing: The tick space of this pool.
 > * poolAmount: a pool amount used for sorting token pairs.
+> * rewardAmountPerSecond: pool reward per second for liquidity providers.
+> * rewardStartTime: the time stamp of reward beginning.
+> * rewardEndTime: the timestamp of reward end.
+> * reward.token: the rewad token info.
 
 **Note: The request header of this interface must include {Accept-Encoding: gzip}**
 
@@ -424,7 +441,8 @@ Data format:
           "token1Amount": "244873",
           "token2Amount": "257963",
           "token1Fee": "240",
-          "token2Fee": "241"
+          "token2Fee": "241",
+          "rewardAmount": "0"
         }
       ],
       "code": 0,
@@ -444,6 +462,7 @@ Data format:
 > * token2Amount: the token2 amount of this position.
 > * token1Fee: the token1 fee of this position.
 > * token2Fee: the token2 fee of this position.
+> * rewardAmount: the reward token amount.
 > * currentPrice: the current price of this pool.
 > * feeRate: the spread factor of this pool.
 > * currentTick: the current tick of this pool.

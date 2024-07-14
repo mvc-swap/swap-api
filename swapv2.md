@@ -325,7 +325,7 @@ data format:
 }
 ```
 
-After obtaining the return parameters from the interface, you need to use the private key corresponding to the address previously passed in through reqswapargs to sign the tx. Refer to the signing code:
+After obtaining the response from the interface, you need to use the private key corresponding to the address previously passed in through reqswapargs to sign the tx. Refer to the signing code:
 
 ```
 const tx = bsv.Transaction(data.txHex)

@@ -294,16 +294,18 @@ data format:
     requestIndex: "1",
     mvcRawTx: "",
     mvcOutputIndex: 0,
-    amountCheckRawTx: "",
-    liquidityAmount
+    liquidityAmount: "100",
+    tickLower: "-700",
+    tickUpper: "800",
 }
 ```
 > * symbol: swap symbol.
 > * requestIndex: returned in ```/reqswapargs```.
 > * mvcRawTx: The raw transaction for transfering mvc to mvcAddress.
 > * mvcOutputIndex: The outputIndex of transaction for mvc transfering.
-> * amountCheckRawTx: the unlockFromContract tx used in token transfering.
 > * liquidityAmount: The liquidity amount user want to remove.
+> * tickLower: the lower tick of this position.
+> * tickUpper: the upper tick of this position.
 
 **Note: the mvc transfer amount should be txFee**
 

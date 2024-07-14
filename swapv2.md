@@ -317,6 +317,48 @@ data format:
     "code": 0,
     "msg": "",
     "data": {
+        "txHex": "",
+        "scriptHex": "",
+        "satoshis": "100",
+        "inputIndex": 0,
+    }
+}
+```
+
+After obtaining the return parameters from the interface, you need to use the private key corresponding to the address previously passed in through reqswapargs to sign the tx. Refer to the signing code:
+
+```
+const tx = bsv.Transaction(data.txHex)
+const script = bsv.Script.fromBuffer(Buffer.from(data.scriptHex, 'hex'))
+const pubKey = toHex(this.privateKey.publicKey)
+const sig = toHex(signTx(tx, this.privateKey, script.toASM(), Number(data.satoshis), data.inputIndex))
+```
+
+After calculating the pubKey and sig, continue to call the removeliq2 interface.
+
+### Request
+- Methos: **POST**
+- URL: ```/removeliq2```
+- Body: 
+```
+{
+    symbol: "mvc-mtt",
+    requestIndex: "1",
+    pubKey: "",
+    sig: ""
+}
+```
+> * symbol: the symbol of swap pool.
+> * requestIndex: returned in ```/reqswapargs```.
+> * pubKey: the public key of user address.
+> * sig: the signature of tx.
+
+### Response
+```
+{
+    "code": 0,
+    "msg": "",
+    "data": {
         txid: '88e64bcf3517c864bb4c224b52084d3b3261a57814dceb19f2b8af07934f9cf8',
         token1Amount: '13997',
         token2Amount: '715070265'
@@ -404,48 +446,6 @@ Data format:
 **Note: the mvc transfer amount should be txFee**
 
 **Note2: Do not broadcast rawTx, compress data and set header like addliq**
-
-### Response
-```
-{
-    "code": 0,
-    "msg": "",
-    "data": {
-        "txHex": "",
-        "scriptHex": "",
-        "satoshis": "100",
-        "inputIndex": 0,
-    }
-}
-```
-
-After obtaining the return parameters from the interface, you need to use the private key corresponding to the address previously passed in through reqswapargs to sign the tx. Refer to the signing code:
-
-```
-const tx = bsv.Transaction(data.txHex)
-const script = bsv.Script.fromBuffer(Buffer.from(data.scriptHex, 'hex'))
-const pubKey = toHex(this.privateKey.publicKey)
-const sig = toHex(signTx(tx, this.privateKey, script.toASM(), Number(data.satoshis), data.inputIndex))
-```
-
-After calculating the pubKey and sig, continue to call the removeliq2 interface.
-
-### Request
-- Methos: **POST**
-- URL: ```/removeliq2```
-- Body: 
-```
-{
-    symbol: "mvc-mtt",
-    requestIndex: "1",
-    pubKey: "",
-    sig: ""
-}
-```
-> * symbol: the symbol of swap pool.
-> * requestIndex: returned in ```/reqswapargs```.
-> * pubKey: the public key of user address.
-> * sig: the signature of tx.
 
 ### Response
 ```
